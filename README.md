@@ -1,7 +1,6 @@
 # morph-tasks
 
 ## SPA Task
-
 - [] User should be able to log in (without api, just save session to localStorage)
 - [] Use youtube api to list all videos
 - [] Use youtube api to search through videos
@@ -18,3 +17,31 @@ around
 Bonus:
 - [] In the favorites list it should be able to order by date added, or by length of the
 video (for this you should use indexedDB instead of localStorage)
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
