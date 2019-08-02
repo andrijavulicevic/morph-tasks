@@ -2,17 +2,28 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Login from  './views/Login.vue'
+import store from './store/';
 
 Vue.use(Router)
 
-export default new Router({
+const ifAuthenticated = (to, from, next) => {
+  console.log(store);
+  if (store.getters.isLoggedIn) {
+    next()
+    return
+  }
+  next('/login');
+}
+
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      beforeEnter: ifAuthenticated
     },
     {
       path: '/login',
@@ -20,4 +31,6 @@ export default new Router({
       component: Login
     }
   ]
-})
+});
+
+export default router;

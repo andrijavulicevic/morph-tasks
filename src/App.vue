@@ -7,8 +7,9 @@
       <v-spacer></v-spacer>
       <v-btn
         text
+        @click="logout"
       >
-        TODO: Logut
+        Logut
       </v-btn>
     </v-app-bar>
 
@@ -19,6 +20,8 @@
 </template>
 
 <script>
+import {LOGOUT} from './store/actions.type';
+
 export default {
   name: 'App',
   components: {
@@ -26,5 +29,11 @@ export default {
   data: () => ({
     //
   }),
+  methods: {
+    logout() {
+      this.$store.dispatch(LOGOUT);
+      this.$router.push({name: 'login'});
+    }
+  }
 };
 </script>
