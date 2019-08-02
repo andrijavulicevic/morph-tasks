@@ -1,7 +1,7 @@
 # morph-tasks
 
 ## SPA Task
-- [] User should be able to log in (without api, just save session to localStorage)
+- [x] User should be able to log in (without api, just save session to localStorage)
 - [] Use youtube api to list all videos
 - [] Use youtube api to search through videos
 - [] User should be able to multi select videos and mark them as favorites to his profile
