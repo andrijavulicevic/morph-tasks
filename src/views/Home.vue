@@ -12,6 +12,7 @@
       <VideoPreviewList
         v-else
         :videos="videos"
+        :favorites="favorites"
       />
     </v-flex>
   </v-layout>
@@ -37,7 +38,8 @@ export default {
     ...mapGetters({
       loading: 'getLoading',
       error: 'getError',
-      videos: 'getVideos'
+      videos: 'getVideos',
+      favorites: 'getFavorites'
     })
   },
   methods: {

@@ -13,19 +13,49 @@
       </v-card-title>
     </v-img>
     <v-card-actions>
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
+      <v-layout>
+        <v-flex>
+          <v-checkbox 
+            v-model="videoChecked"
+            :disabled="video.isFavorite"
+            @change="onSelectVideo(videoChecked)"
+          ></v-checkbox>
+        </v-flex>
+        <v-flex>
+          <v-btn icon @click="toggleFavorite">
+            <v-icon :color="iconColor">mdi-heart</v-icon>
+          </v-btn>
+        </v-flex>
+      </v-layout>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import { ADD_SINGLE_FAVORITE, REMOVE_SINGLE_FAVORITE } from '../store/actions.type';
+
 export default {
   props: {
     video: {
       type: Object,
       required: true
+    }
+  },
+  data: () => ({
+    videoChecked: false
+  }),
+  computed: {
+    iconColor() {
+      return this.video.isFavorite? 'red': 'gray';
+    }
+  },
+  methods: {
+    onSelectVideo(checked) {
+      this.$emit('videoSelected', checked);
+    },
+    toggleFavorite() {
+      if(this.video.isFavorite) this.$store.dispatch(REMOVE_SINGLE_FAVORITE, this.video);
+      else this.$store.dispatch(ADD_SINGLE_FAVORITE, this.video);
     }
   }
 }

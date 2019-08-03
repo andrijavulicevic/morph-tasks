@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Login from  './views/Login.vue'
+import Home from './views/Home'
+import Login from  './views/Login'
+import Favorites from './views/Favorites';
 import store from './store/';
 
 Vue.use(Router)
@@ -9,7 +10,7 @@ Vue.use(Router)
 const ifAuthenticated = (to, from, next) => {
   if (store.getters.isLoggedIn) {
     next()
-    return
+    return;
   }
   next('/login');
 }
@@ -28,6 +29,12 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: Favorites,
+      beforeEnter: ifAuthenticated
     }
   ]
 });

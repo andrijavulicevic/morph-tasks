@@ -4,6 +4,7 @@ import VuexPersistence from 'vuex-persist';
 
 import auth from './auth.module';
 import videos from './videos.module';
+import favorites from './favorites.module';
 
 Vue.use(Vuex);
 
@@ -16,7 +17,8 @@ const vuexLocal = new VuexPersistence({
 export default new Vuex.Store({
   modules: {
     auth,
-    videos
+    videos,
+    favorites
   },
   plugins: [vuexLocal.plugin]
 });
