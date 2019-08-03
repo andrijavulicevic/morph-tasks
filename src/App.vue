@@ -2,8 +2,11 @@
   <v-app>
     <v-app-bar app v-if="$route.name !=='login'">
       <v-toolbar-title class="headline text-uppercase">
-        <span>YouTube search</span>
+        <router-link tag="span" to="/">YT search</router-link>
       </v-toolbar-title>
+      <v-toolbar-items >
+        <v-btn text to="/favorites">Favorites</v-btn>
+      </v-toolbar-items>
       <v-spacer></v-spacer>
       <v-btn
         text

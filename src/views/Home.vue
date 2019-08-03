@@ -1,15 +1,17 @@
 <template>
-  <v-layout>
+  <v-layout justify-center>
     <v-flex
-      md12
+      md10
     >
+      <h1>Videos</h1>
+
       <Search @search="searchVideos" />
 
       <v-overlay :value="loading" v-if="!videos.sizes &&  loading">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>
 
-      <VideoPreviewList
+      <VideoList
         v-else
         :videos="videos"
         :favorites="favorites"
@@ -23,12 +25,12 @@ import {mapGetters, mapMutations} from 'vuex';
 import {LOAD_ALL_VIDEOS, LOAD_SEARCH_VIDEOS} from '../store/actions.type';
 import {SET_SEARCH_TERM} from '../store/mutations.type';
 
-import VideoPreviewList from '../components/VideoPreviewList';
+import VideoList from '../components/VideoList/index';
 import Search from '../components/Search';
 
 export default {
   components: {
-    VideoPreviewList,
+    VideoList,
     Search
   },
   created() {

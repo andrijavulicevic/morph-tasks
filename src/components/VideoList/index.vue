@@ -3,7 +3,7 @@
     align-center
     justify-center
   >
-    <v-flex xs12 sm8 md4>  
+    <v-flex xs12 sm8 md6>  
       <v-layout>
         <v-flex class="mb-5">
           <v-btn 
@@ -17,7 +17,7 @@
         </v-flex>
       </v-layout>
 
-      <VideoPreview
+      <Item
         v-for="video in videosWithFavFlag"
         :key="video.id"
         :video="video"
@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import VideoPreview from './VideoPreview';
-import { SAVE_FAVORITES } from '../store/actions.type';
+import Item from './Item';
+import { SAVE_FAVORITES } from '../../store/actions.type';
 
 export default {
   props: {
@@ -43,7 +43,7 @@ export default {
     }
   },
   components: {
-    VideoPreview
+    Item
   },
   data: () => ({
     selectedVideos: []

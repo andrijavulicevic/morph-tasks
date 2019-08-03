@@ -11,7 +11,7 @@ Vue.use(Vuex);
 const vuexLocal = new VuexPersistence({
   key: 'morph-spa',
   storage: window.localStorage,
-  modules: ['auth']
+  modules: ['auth', 'favorites']
 });
 
 export default new Vuex.Store({

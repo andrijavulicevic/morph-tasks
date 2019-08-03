@@ -12,7 +12,7 @@ const getters = {
 const mutations =  {
   [ADD_FAVORITE](state, newFavorite) {
     if(!state.favorites.find(f => f.id === newFavorite.id)) {
-      state.favorites.push(newFavorite);
+      state.favorites.push({ ...newFavorite, dateAdded: new Date() });
     }
   },
   [REMOVE_FAVORITE](state, favoriteToRemove) {

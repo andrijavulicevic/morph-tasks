@@ -5,7 +5,6 @@
     <v-img
       class="white--text"
       :height="video.snippet.thumbnails.high.height"
-      :width="video.snippet.thumbnails.high.width"
       :src="video.snippet.thumbnails.high.url"
     >
       <v-card-title class="align-end fill-height">
@@ -16,6 +15,7 @@
       <v-layout>
         <v-flex>
           <v-checkbox 
+            label="Select"
             v-model="videoChecked"
             :disabled="video.isFavorite"
             @change="onSelectVideo(videoChecked)"
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { ADD_SINGLE_FAVORITE, REMOVE_SINGLE_FAVORITE } from '../store/actions.type';
+import { ADD_SINGLE_FAVORITE, REMOVE_SINGLE_FAVORITE } from '../../store/actions.type';
 
 export default {
   props: {
