@@ -4,9 +4,9 @@
 - [x] User should be able to log in (without api, just save session to localStorage)
 - [x] Use youtube api to list all videos
 - [x] Use youtube api to search through videos
-- [] User should be able to multi select videos and mark them as favorites to his profile
+- [x] User should be able to multi select videos and mark them as favorites to his profile
 (store in localStorage)
-- [] User should have page to view and update his favorite videos
+- [x] User should have page to view and update his favorite videos
 - [] App should have an option to play video in a modal (popup) like window and
 should have an option to move through the screen using mouse drag & drop
 - [] User should be able to play multiple videos at the same time and move them
