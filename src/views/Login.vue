@@ -25,7 +25,7 @@
               <v-text-field
                 label="Username"
                 name="username"
-                prepend-icon="person"
+                prepend-icon="mdi-person"
                 type="text"
                 v-model="username"
                 v-validate="'required'"
@@ -35,7 +35,7 @@
               <v-text-field
                 label="Password"
                 name="password"
-                prepend-icon="lock"
+                prepend-icon="mdi-lock"
                 type="password"
                 v-model="password"
                 v-validate="'required'"

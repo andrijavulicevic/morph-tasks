@@ -24,16 +24,16 @@ const mutations = {
 };
 
 const actions = {
-  [LOGIN](context, user) {
+  async [LOGIN]({commit}, user) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        context.commit(SET_USER, user);
+        commit(SET_USER, user);
         resolve();
       }, 100)
     });
   },
-  [LOGOUT](context) {
-    context.commit(REMOVE_USER);
+  [LOGOUT]({commit}) {
+    commit(REMOVE_USER);
   }
 };
 

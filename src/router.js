@@ -7,7 +7,6 @@ import store from './store/';
 Vue.use(Router)
 
 const ifAuthenticated = (to, from, next) => {
-  console.log(store);
   if (store.getters.isLoggedIn) {
     next()
     return
