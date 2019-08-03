@@ -16,6 +16,10 @@
         :videos="videos"
         :favorites="favorites"
       />
+
+      <div>
+        <VideoModal :video="playingVideos[0]" />
+      </div>
     </v-flex>
   </v-layout>
 </template>
@@ -27,11 +31,13 @@ import {SET_SEARCH_TERM} from '../store/mutations.type';
 
 import VideoList from '../components/VideoList/index';
 import Search from '../components/Search';
+import VideoModal from '../components/VideoModal';
 
 export default {
   components: {
     VideoList,
-    Search
+    Search,
+    VideoModal
   },
   created() {
     this.$store.dispatch(LOAD_ALL_VIDEOS);
@@ -41,7 +47,8 @@ export default {
       loading: 'getLoading',
       error: 'getError',
       videos: 'getVideos',
-      favorites: 'getFavorites'
+      favorites: 'getFavorites',
+      playingVideos: 'getVideosPlaying'
     })
   },
   methods: {

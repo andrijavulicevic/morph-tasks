@@ -12,8 +12,8 @@
       </v-card-title>
     </v-img>
     <v-card-actions>
-      <v-layout>
-        <v-flex>
+      <v-layout >
+        <v-flex offset-1>
           <v-checkbox 
             label="Select"
             v-model="videoChecked"
@@ -21,7 +21,12 @@
             @change="onSelectVideo(videoChecked)"
           ></v-checkbox>
         </v-flex>
-        <v-flex>
+        <v-flex offset-1>
+          <v-btn icon @click="playVideo">
+            <v-icon color="blue">mdi-play</v-icon>
+          </v-btn>
+        </v-flex>
+        <v-flex offset-1>
           <v-btn icon @click="toggleFavorite">
             <v-icon :color="iconColor">mdi-heart</v-icon>
           </v-btn>
@@ -32,7 +37,11 @@
 </template>
 
 <script>
-import { ADD_SINGLE_FAVORITE, REMOVE_SINGLE_FAVORITE } from '../../store/actions.type';
+import { 
+  ADD_SINGLE_FAVORITE, 
+  REMOVE_SINGLE_FAVORITE, 
+  ADD_PLAYING_VIDEO 
+} from '../../store/actions.type';
 
 export default {
   props: {
@@ -56,6 +65,9 @@ export default {
     toggleFavorite() {
       if(this.video.isFavorite) this.$store.dispatch(REMOVE_SINGLE_FAVORITE, this.video);
       else this.$store.dispatch(ADD_SINGLE_FAVORITE, this.video);
+    },
+    playVideo() {
+      this.$store.dispatch(ADD_PLAYING_VIDEO, this.video);
     }
   }
 }

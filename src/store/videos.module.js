@@ -1,7 +1,9 @@
 import {
   LOAD_ALL_VIDEOS,
   LOAD_SEARCH_VIDEOS,
-  CLEAR_VIDEOS
+  CLEAR_VIDEOS,
+  ADD_PLAYING_VIDEO,
+  REMOVE_PLAYING_VIDEO
 } from './actions.type';
 import {
   SET_VIDEOS,
@@ -9,7 +11,9 @@ import {
   TOGGLE_LOADING,
   SET_NEXT_PAGE_TOKEN,
   RESET_VIDEOS_STATE,
-  SET_SEARCH_TERM
+  SET_SEARCH_TERM,
+  SET_VIDEO_PLAYING,
+  REMOVE_VIDEO_PLAYING
 } from './mutations.type';
 import {loadMostPopular, searchVideos} from '../api/';
 
@@ -18,19 +22,15 @@ const state = {
   error: '',
   videoList: [],
   nextPageToken: '',
-  searchTerm: ''
+  searchTerm: '',
+  videosPlaying: []
 };
 
 const getters = {
-  getLoading(state) {
-    return state.loading;
-  },
-  getError(state) {
-    return state.error;
-  },
-  getVideos(state) {
-    return state.videoList;
-  }
+  getLoading: state => state.loading,
+  getError: state => state.error,
+  getVideos: state => state.videoList,
+  getVideosPlaying: state => state.videosPlaying
 };
 
 const mutations = {
@@ -54,6 +54,14 @@ const mutations = {
   },
   [SET_SEARCH_TERM](state, searchTerm) {
     state.searchTerm = searchTerm;
+  },
+  [SET_VIDEO_PLAYING](state, video) {
+    state.videosPlaying.push(video);
+  },
+  [REMOVE_VIDEO_PLAYING](state, video) {
+    state.videosPlaying = state.videosPlaying.filter(
+      v => v.id !== video.id
+    );
   }
 };
 
@@ -86,6 +94,12 @@ const actions = {
   },
   async [CLEAR_VIDEOS]({commit}) {
     commit(RESET_VIDEOS_STATE);
+  },
+  [ADD_PLAYING_VIDEO]({commit}, video) {
+    commit(SET_VIDEO_PLAYING, video);
+  },
+  [REMOVE_PLAYING_VIDEO]({commit}, video) {
+    commit(REMOVE_VIDEO_PLAYING, video);
   }
 };
 
