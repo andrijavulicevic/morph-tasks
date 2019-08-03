@@ -8,7 +8,8 @@ import {
   SET_ERROR,
   TOGGLE_LOADING,
   SET_NEXT_PAGE_TOKEN,
-  RESET_VIDEOS_STATE
+  RESET_VIDEOS_STATE,
+  SET_SEARCH_TERM
 } from './mutations.type';
 import {loadMostPopular, searchVideos} from '../api/';
 
@@ -16,7 +17,8 @@ const state = {
   loading: false,
   error: '',
   videoList: [],
-  nextPageToken: ''
+  nextPageToken: '',
+  searchTerm: ''
 };
 
 const getters = {
@@ -49,6 +51,9 @@ const mutations = {
     state.error = '';
     state.nextPageToken = '';
     state.videoList = [];
+  },
+  [SET_SEARCH_TERM](state, searchTerm) {
+    state.searchTerm = searchTerm;
   }
 };
 
@@ -67,7 +72,17 @@ const actions = {
     }
   },
   async [LOAD_SEARCH_VIDEOS]({commit, state}) {
-    // todo
+    if (state.loading) return;
+    commit(RESET_VIDEOS_STATE);
+    commit(TOGGLE_LOADING);
+    try {
+      const response = await searchVideos(state.searchTerm);
+      commit(SET_VIDEOS, response.data.items);
+      commit(TOGGLE_LOADING);
+    } catch(error) {
+      commit(TOGGLE_LOADING);
+      commit(SET_ERROR, error.message)
+    }
   },
   async [CLEAR_VIDEOS]({commit}) {
     commit(RESET_VIDEOS_STATE);

@@ -25,7 +25,7 @@
               <v-text-field
                 label="Username"
                 name="username"
-                prepend-icon="mdi-person"
+                prepend-icon="mdi-account"
                 type="text"
                 v-model="username"
                 v-validate="'required'"
