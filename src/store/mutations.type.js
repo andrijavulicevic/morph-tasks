@@ -5,3 +5,4 @@ export const TOGGLE_LOADING = 'toggleLoading';
 export const SET_ERROR = 'setError';
 export const SET_VIDEOS = 'setVideos';
 export const SET_NEXT_PAGE_TOKEN = 'setNextPageToken';
+export const RESET_VIDEOS_STATE = 'resetVideosState';

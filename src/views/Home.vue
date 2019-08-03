@@ -14,7 +14,7 @@
 
 <script>
 import {mapGetters} from 'vuex';
-import {LOAD_VIDEOS} from '../store/actions.type';
+import {LOAD_ALL_VIDEOS, LOAD_SEARCH_VIDEOS} from '../store/actions.type';
 import VideoPreviewList from '../components/VideoPreviewList';
 
 export default {
@@ -22,7 +22,7 @@ export default {
     VideoPreviewList
   },
   created() {
-    this.$store.dispatch(LOAD_VIDEOS);
+    this.$store.dispatch(LOAD_ALL_VIDEOS);
   },
   computed: {
     ...mapGetters({

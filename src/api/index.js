@@ -6,12 +6,23 @@ function loadMostPopular() {
     params: { 
       part: 'snippet',
       chart: 'mostPopular',
-      region: 'RS',
       maxResults: 50
     }
   })
 }
 
+function searchVideos(searchTerm) {
+  return api.get('/search', {
+    params: {
+      part: 'snippet',
+      maxResults: 25,
+      type: 'video',
+      q: searchTerm
+    }
+  });
+}
+
 export {
-  loadMostPopular
+  loadMostPopular,
+  searchVideos
 };

@@ -1,11 +1,16 @@
-import {LOAD_VIDEOS} from './actions.type';
+import {
+  LOAD_ALL_VIDEOS,
+  LOAD_SEARCH_VIDEOS,
+  CLEAR_VIDEOS
+} from './actions.type';
 import {
   SET_VIDEOS,
   SET_ERROR,
   TOGGLE_LOADING,
-  SET_NEXT_PAGE_TOKEN
+  SET_NEXT_PAGE_TOKEN,
+  RESET_VIDEOS_STATE
 } from './mutations.type';
-import {loadMostPopular} from '../api/';
+import {loadMostPopular, searchVideos} from '../api/';
 
 const state = {
   loading: false,
@@ -38,24 +43,34 @@ const mutations = {
   },
   [SET_NEXT_PAGE_TOKEN](state, token) {
     state.nextPageToken = token;
+  },
+  [RESET_VIDEOS_STATE](state) {
+    state.loading = false;
+    state.error = '';
+    state.nextPageToken = '';
+    state.videoList = [];
   }
 };
 
 const actions = {
-  async [LOAD_VIDEOS]({commit, state}) {
+  async [LOAD_ALL_VIDEOS]({commit, state}) {
     if (state.loading) return;
     commit(TOGGLE_LOADING);
     try {
       const response = await loadMostPopular();
-      console.log(response);
       commit(SET_NEXT_PAGE_TOKEN, response.data.nextPageToken);
       commit(SET_VIDEOS, response.data.items);
       commit(TOGGLE_LOADING);
     } catch(error) {
-      console.error(error);
       commit(TOGGLE_LOADING);
       commit(SET_ERROR, error.message)
     }
+  },
+  async [LOAD_SEARCH_VIDEOS]({commit, state}) {
+    // todo
+  },
+  async [CLEAR_VIDEOS]({commit}) {
+    commit(RESET_VIDEOS_STATE);
   }
 };
 

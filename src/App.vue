@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar app>
+    <v-app-bar app v-if="$route.name !=='login'">
       <v-toolbar-title class="headline text-uppercase">
         <span>YouTube search</span>
       </v-toolbar-title>
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {LOGOUT} from './store/actions.type';
+import {LOGOUT, CLEAR_VIDEOS} from './store/actions.type';
 
 export default {
   name: 'App',
@@ -32,6 +32,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch(LOGOUT);
+      this.$store.dispatch(CLEAR_VIDEOS);
       this.$router.push({name: 'login'});
     }
   }
