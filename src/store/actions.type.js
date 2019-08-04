@@ -11,3 +11,4 @@ export const REMOVE_ALL_PLAYING_VIDEOS = 'removeAllPlayingVideos';
 export const SAVE_FAVORITES = 'saveFavorites';
 export const ADD_SINGLE_FAVORITE = 'addSingleFavorite';
 export const REMOVE_SINGLE_FAVORITE = 'removeSingleFavorite';
+export const ADD_ALL_PLAYING_TO_FAVORITES = 'addAllPlayingToFavorites';

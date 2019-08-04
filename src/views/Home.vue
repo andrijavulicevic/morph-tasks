@@ -18,15 +18,27 @@
       />
 
       <div>
-        <v-btn 
+        <div 
           v-if="playingVideos.length"
-          class="mx-2" 
-          fab dark 
-          color="primary"
-          @click="stopAllPlayingVideos"
+          class="all-videos-control" 
         >
-          <v-icon dark>mdi-stop</v-icon>
-        </v-btn>
+          <v-btn 
+            class="mx-2" 
+            fab dark 
+            color="primary"
+            @click="stopAllPlayingVideos"
+          >
+            <v-icon dark>mdi-stop</v-icon>
+          </v-btn>
+          <v-btn 
+            class="mx-2" 
+            fab dark 
+            color="primary"
+            @click="addAllPlayingToFavorite"
+          >
+            <v-icon dark>mdi-heart</v-icon>
+          </v-btn>
+        </div>
         <VideoModal
           v-for="video in playingVideos"
           :key="video.id"
@@ -42,7 +54,8 @@ import {mapGetters, mapMutations} from 'vuex';
 import {
   LOAD_ALL_VIDEOS,
   LOAD_SEARCH_VIDEOS,
-  REMOVE_ALL_PLAYING_VIDEOS
+  REMOVE_ALL_PLAYING_VIDEOS,
+  ADD_ALL_PLAYING_TO_FAVORITES
 } from '../store/actions.type';
 import {SET_SEARCH_TERM} from '../store/mutations.type';
 
@@ -79,13 +92,16 @@ export default {
     },
     stopAllPlayingVideos() {
       this.$store.dispatch(REMOVE_ALL_PLAYING_VIDEOS);
+    },
+    addAllPlayingToFavorite() {
+      this.$store.dispatch(ADD_ALL_PLAYING_TO_FAVORITES);
     }
   }
 };
 </script>
 
 <style>
-.stop-all-btn  {
+.all-videos-control  {
   position: fixed;
   top: 0;
   left: 50%;

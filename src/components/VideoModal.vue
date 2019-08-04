@@ -98,7 +98,8 @@ export default {
   }),
   computed: {
     videoSrc() {
-      return `https://www.youtube.com/embed/${this.video.id}?autoplay=1&showinfo=0&controls=0&fs=0&disablekb=1`;
+      const baseVideoURL = 'https://www.youtube.com/embed/';
+      return `${baseVideoURL}${this.video.id}?autoplay=1&controls=0&fs=0&disablekb=1&modestbranding=1`;
     }
   },
   methods: {

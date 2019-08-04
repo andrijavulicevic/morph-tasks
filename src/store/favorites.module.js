@@ -1,5 +1,10 @@
 import { ADD_FAVORITE, REMOVE_FAVORITE } from './mutations.type';
-import { SAVE_FAVORITES, ADD_SINGLE_FAVORITE, REMOVE_SINGLE_FAVORITE } from './actions.type';
+import { 
+  SAVE_FAVORITES, 
+  ADD_SINGLE_FAVORITE, 
+  REMOVE_SINGLE_FAVORITE,
+  ADD_ALL_PLAYING_TO_FAVORITES
+} from './actions.type';
 
 const state = {
   favorites: []
@@ -29,6 +34,9 @@ const actions = {
   },
   [REMOVE_SINGLE_FAVORITE]({commit}, favorite) {
     commit(REMOVE_FAVORITE, favorite);
+  },
+  [ADD_ALL_PLAYING_TO_FAVORITES]({commit, rootState}) {
+    rootState.videos.videosPlaying.forEach(videoPlaying => commit(ADD_FAVORITE, videoPlaying));
   }
 };
 

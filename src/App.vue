@@ -12,7 +12,7 @@
         text
         @click="logout"
       >
-        Logut
+        Logout
       </v-btn>
     </v-app-bar>
 
