@@ -19,6 +19,9 @@ Bonus:
 video (for this you should use indexedDB instead of localStorage)
 
 ## Project setup
+
+Before running project, create `.env` file and add `VUE_APP_API_KEY=${GOOGLE_API_KEY}` where `${GOOGLE_API_KEY}` is Google's API key with granted access to youtube_v3 service. 
+
 ```
 npm install
 ```

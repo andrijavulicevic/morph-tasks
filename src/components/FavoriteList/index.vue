@@ -3,7 +3,7 @@
     align-center
     justify-center
   >
-    <v-flex xs12 sm8 md6> 
+    <v-flex xs12 sm10 md8> 
       <Item
         v-for="favorite in favorites"
         :key="favorite.id"
