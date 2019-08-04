@@ -18,7 +18,11 @@
       />
 
       <div>
-        <VideoModal :video="playingVideos[0]" />
+        <VideoModal
+          v-for="video in playingVideos"
+          :key="video.id"
+          :video="video"
+          />
       </div>
     </v-flex>
   </v-layout>
