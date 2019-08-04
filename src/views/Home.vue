@@ -1,22 +1,39 @@
 <template>
-  <v-layout justify-center>
+  <v-layout justify-center class="mb-10 mt-5">
     <v-flex
       md10
     >
       <h1>Videos</h1>
 
-      <Search @search="searchVideos" />
-
-      <v-overlay :value="loading" v-if="!videos.sizes &&  loading">
+      <!-- LOADING -->
+      <v-overlay v-if="!videos.length && loading">
         <v-progress-circular indeterminate size="64"></v-progress-circular>
       </v-overlay>
+      
+      <!-- ERROR -->
+      <v-alert v-else-if="error" type="error">
+        {{error}}
+      </v-alert>
 
-      <VideoList
-        v-else
-        :videos="videos"
-        :favorites="favorites"
-      />
+      <!-- SUCCESS -->
+      <div v-else>
+        <Search @search="searchVideos" />
+        <VideoList
+          :videos="videos"
+          :favorites="favorites"
+        />
 
+        <v-layout justify-center aling-center>
+          <v-btn 
+            v-if="videos.length"
+            :loading="loading && !!videos.length"
+            @click="loadMoreResults"
+          >
+            Load More...
+          </v-btn>
+        </v-layout>
+      </div>
+      
       <div>
         <div 
           v-if="playingVideos.length"
@@ -41,7 +58,7 @@
         </div>
         <VideoModal
           v-for="video in playingVideos"
-          :key="video.id"
+          :key="video.id.videoId"
           :video="video"
           />
       </div>
@@ -52,8 +69,7 @@
 <script>
 import {mapGetters, mapMutations} from 'vuex';
 import {
-  LOAD_ALL_VIDEOS,
-  LOAD_SEARCH_VIDEOS,
+  LOAD_VIDEOS,
   REMOVE_ALL_PLAYING_VIDEOS,
   ADD_ALL_PLAYING_TO_FAVORITES
 } from '../store/actions.type';
@@ -70,7 +86,7 @@ export default {
     VideoModal
   },
   created() {
-    this.$store.dispatch(LOAD_ALL_VIDEOS);
+    this.$store.dispatch(LOAD_VIDEOS);
   },
   computed: {
     ...mapGetters({
@@ -88,13 +104,16 @@ export default {
     searchVideos(searchTerm) {
       if(!searchTerm) return;
       this.setSearchTerm(searchTerm);
-      this.$store.dispatch(LOAD_SEARCH_VIDEOS);
+      this.$store.dispatch(LOAD_VIDEOS, true);
     },
     stopAllPlayingVideos() {
       this.$store.dispatch(REMOVE_ALL_PLAYING_VIDEOS);
     },
     addAllPlayingToFavorite() {
       this.$store.dispatch(ADD_ALL_PLAYING_TO_FAVORITES);
+    },
+    loadMoreResults() {
+      this.$store.dispatch(LOAD_VIDEOS);
     }
   }
 };

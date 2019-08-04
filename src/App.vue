@@ -29,9 +29,6 @@ export default {
   name: 'App',
   components: {
   },
-  data: () => ({
-    //
-  }),
   methods: {
     logout() {
       this.$store.dispatch(LOGOUT);

@@ -6,7 +6,7 @@
     <v-flex xs12 sm10 md8> 
       <Item
         v-for="favorite in favorites"
-        :key="favorite.id"
+        :key="favorite.id.videoId"
         :favorite="favorite"
       />
     </v-flex>

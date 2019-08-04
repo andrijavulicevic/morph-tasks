@@ -3,8 +3,7 @@ export const REMOVE_USER = 'removeUser';
 
 export const TOGGLE_LOADING = 'toggleLoading';
 export const SET_ERROR = 'setError';
-export const SET_VIDEOS = 'setVideos';
-export const SET_NEXT_PAGE_TOKEN = 'setNextPageToken';
+export const SET_VIDEOS_STATE = 'setVideosState';
 export const RESET_VIDEOS_STATE = 'resetVideosState';
 export const SET_SEARCH_TERM = 'setSearchTerm';
 export const SET_VIDEO_PLAYING =  'addVideoPlaying';

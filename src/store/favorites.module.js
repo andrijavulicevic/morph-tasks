@@ -16,12 +16,12 @@ const getters = {
 
 const mutations =  {
   [ADD_FAVORITE](state, newFavorite) {
-    if(!state.favorites.find(f => f.id === newFavorite.id)) {
+    if(!state.favorites.find(f => f.id.videoId === newFavorite.id.videoId)) {
       state.favorites.push({ ...newFavorite, dateAdded: new Date() });
     }
   },
   [REMOVE_FAVORITE](state, favoriteToRemove) {
-    state.favorites = state.favorites.filter(record => record.id !== favoriteToRemove.id);
+    state.favorites = state.favorites.filter(record => record.id.videoId !== favoriteToRemove.id.videoId);
   }
 };
 

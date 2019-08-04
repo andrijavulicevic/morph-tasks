@@ -1,23 +1,21 @@
 import {
-  LOAD_ALL_VIDEOS,
-  LOAD_SEARCH_VIDEOS,
+  LOAD_VIDEOS,
   CLEAR_VIDEOS,
   ADD_PLAYING_VIDEO,
   REMOVE_PLAYING_VIDEO,
   REMOVE_ALL_PLAYING_VIDEOS
 } from './actions.type';
 import {
-  SET_VIDEOS,
   SET_ERROR,
   TOGGLE_LOADING,
-  SET_NEXT_PAGE_TOKEN,
+  SET_VIDEOS_STATE,
   RESET_VIDEOS_STATE,
   SET_SEARCH_TERM,
   SET_VIDEO_PLAYING,
   REMOVE_VIDEO_PLAYING,
   RESET_PLAYING_VIDEOS_STATE
 } from './mutations.type';
-import {loadMostPopular, searchVideos} from '../api/';
+import {searchVideos} from '../api/';
 
 const state = {
   loading: false,
@@ -42,11 +40,11 @@ const mutations = {
   [SET_ERROR](state, error) {
     state.error = error;
   },
-  [SET_VIDEOS](state, videoList) {
-    state.videoList.push(...videoList);
-  },
-  [SET_NEXT_PAGE_TOKEN](state, token) {
+  [SET_VIDEOS_STATE](state, { videos, token }) {
+    state.videoList.push(...videos);
     state.nextPageToken = token;
+    state.loading = false;
+    state.error = '';
   },
   [RESET_VIDEOS_STATE](state) {
     state.loading = false;
@@ -62,7 +60,7 @@ const mutations = {
   },
   [REMOVE_VIDEO_PLAYING](state, video) {
     state.videosPlaying = state.videosPlaying.filter(
-      v => v.id !== video.id
+      v => v.id.videoId !== video.id.videoId
     );
   },
   [RESET_PLAYING_VIDEOS_STATE](state) {
@@ -71,38 +69,22 @@ const mutations = {
 };
 
 const actions = {
-  async [LOAD_ALL_VIDEOS]({commit, state}) {
+  async [LOAD_VIDEOS]({commit, state}, newSearch) {
     if (state.loading) return;
+    if(newSearch) commit(RESET_VIDEOS_STATE);
     commit(TOGGLE_LOADING);
     try {
-      const response = await loadMostPopular();
-      commit(SET_NEXT_PAGE_TOKEN, response.data.nextPageToken);
-      commit(SET_VIDEOS, response.data.items);
-      commit(TOGGLE_LOADING);
+      const response = await searchVideos(state.searchTerm, state.nextPageToken);
+      commit(SET_VIDEOS_STATE, {
+        videos: response.data.items, 
+        token: response.data.nextPageToken
+      });
     } catch(error) {
       commit(TOGGLE_LOADING);
       commit(SET_ERROR, error.message)
     }
   },
-  async [LOAD_SEARCH_VIDEOS]({commit, state}) {
-    if (state.loading) return;
-    commit(RESET_VIDEOS_STATE);
-    commit(TOGGLE_LOADING);
-    try {
-      const response = await searchVideos(state.searchTerm);
-      // kod pretrage ID je objekat
-      const mappedVideos = response.data.items.map(video  => {
-        video.id = video.id.videoId;
-        return video;
-      })
-      commit(SET_VIDEOS, mappedVideos);
-      commit(TOGGLE_LOADING);
-    } catch(error) {
-      commit(TOGGLE_LOADING);
-      commit(SET_ERROR, error.message)
-    }
-  },
-  async [CLEAR_VIDEOS]({commit}) {
+  [CLEAR_VIDEOS]({commit}) {
     commit(RESET_VIDEOS_STATE);
   },
   [ADD_PLAYING_VIDEO]({commit}, video) {

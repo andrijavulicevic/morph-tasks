@@ -19,7 +19,7 @@
 
       <Item
         v-for="video in videosWithFavFlag"
-        :key="video.id"
+        :key="video.id.videoId"
         :video="video"
         @videoSelected="(flag) => addVideoToSelected(video, flag)"
       />
@@ -54,7 +54,7 @@ export default {
 
       const videosWithFavs = [];
       this.videos.forEach(video => {
-        if(this.favorites.find(fav => fav.id ===  video.id)) {
+        if(this.favorites.find(fav => fav.id.videoId ===  video.id.videoId)) {
           videosWithFavs.push({ ...video, isFavorite: true });
         } else {
           videosWithFavs.push({ ...video, isFavorite: false });
@@ -68,7 +68,7 @@ export default {
       if (flag) {
         this.selectedVideos.push(video);
       } else {
-        this.selectedVideos = this.selectedVideos.filter(v =>  v.id !== video.id);
+        this.selectedVideos = this.selectedVideos.filter(v =>  v.id.videoId !== video.id.videoId);
       }
     },
     saveFavorites() {

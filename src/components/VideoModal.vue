@@ -99,7 +99,7 @@ export default {
   computed: {
     videoSrc() {
       const baseVideoURL = 'https://www.youtube.com/embed/';
-      return `${baseVideoURL}${this.video.id}?autoplay=1&controls=0&fs=0&disablekb=1&modestbranding=1`;
+      return `${baseVideoURL}${this.video.id.videoId}?autoplay=1&controls=0&fs=0&disablekb=1&modestbranding=1`;
     }
   },
   methods: {
