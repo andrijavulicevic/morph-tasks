@@ -3,7 +3,8 @@ import {
   LOAD_SEARCH_VIDEOS,
   CLEAR_VIDEOS,
   ADD_PLAYING_VIDEO,
-  REMOVE_PLAYING_VIDEO
+  REMOVE_PLAYING_VIDEO,
+  REMOVE_ALL_PLAYING_VIDEOS
 } from './actions.type';
 import {
   SET_VIDEOS,
@@ -13,7 +14,8 @@ import {
   RESET_VIDEOS_STATE,
   SET_SEARCH_TERM,
   SET_VIDEO_PLAYING,
-  REMOVE_VIDEO_PLAYING
+  REMOVE_VIDEO_PLAYING,
+  RESET_PLAYING_VIDEOS_STATE
 } from './mutations.type';
 import {loadMostPopular, searchVideos} from '../api/';
 
@@ -62,6 +64,9 @@ const mutations = {
     state.videosPlaying = state.videosPlaying.filter(
       v => v.id !== video.id
     );
+  },
+  [RESET_PLAYING_VIDEOS_STATE](state) {
+    state.videosPlaying = [];
   }
 };
 
@@ -85,7 +90,12 @@ const actions = {
     commit(TOGGLE_LOADING);
     try {
       const response = await searchVideos(state.searchTerm);
-      commit(SET_VIDEOS, response.data.items);
+      // kod pretrage ID je objekat
+      const mappedVideos = response.data.items.map(video  => {
+        video.id = video.id.videoId;
+        return video;
+      })
+      commit(SET_VIDEOS, mappedVideos);
       commit(TOGGLE_LOADING);
     } catch(error) {
       commit(TOGGLE_LOADING);
@@ -100,6 +110,9 @@ const actions = {
   },
   [REMOVE_PLAYING_VIDEO]({commit}, video) {
     commit(REMOVE_VIDEO_PLAYING, video);
+  },
+  [REMOVE_ALL_PLAYING_VIDEOS]({commit}) {
+    commit(RESET_PLAYING_VIDEOS_STATE);
   }
 };
 

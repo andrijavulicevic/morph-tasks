@@ -18,6 +18,15 @@
       />
 
       <div>
+        <v-btn 
+          v-if="playingVideos.length"
+          class="mx-2" 
+          fab dark 
+          color="primary"
+          @click="stopAllPlayingVideos"
+        >
+          <v-icon dark>mdi-stop</v-icon>
+        </v-btn>
         <VideoModal
           v-for="video in playingVideos"
           :key="video.id"
@@ -30,7 +39,11 @@
 
 <script>
 import {mapGetters, mapMutations} from 'vuex';
-import {LOAD_ALL_VIDEOS, LOAD_SEARCH_VIDEOS} from '../store/actions.type';
+import {
+  LOAD_ALL_VIDEOS,
+  LOAD_SEARCH_VIDEOS,
+  REMOVE_ALL_PLAYING_VIDEOS
+} from '../store/actions.type';
 import {SET_SEARCH_TERM} from '../store/mutations.type';
 
 import VideoList from '../components/VideoList/index';
@@ -63,7 +76,19 @@ export default {
       if(!searchTerm) return;
       this.setSearchTerm(searchTerm);
       this.$store.dispatch(LOAD_SEARCH_VIDEOS);
+    },
+    stopAllPlayingVideos() {
+      this.$store.dispatch(REMOVE_ALL_PLAYING_VIDEOS);
     }
   }
 };
 </script>
+
+<style>
+.stop-all-btn  {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  z-index: 9999;
+}
+</style>
