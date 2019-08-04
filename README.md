@@ -7,7 +7,7 @@
 - [x] User should be able to multi select videos and mark them as favorites to his profile
 (store in localStorage)
 - [x] User should have page to view and update his favorite videos
-- [] App should have an option to play video in a modal (popup) like window and
+- [x] App should have an option to play video in a modal (popup) like window and
 should have an option to move through the screen using mouse drag & drop
 - [] User should be able to play multiple videos at the same time and move them
 around
