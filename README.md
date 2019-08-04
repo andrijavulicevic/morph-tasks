@@ -12,7 +12,7 @@ should have an option to move through the screen using mouse drag & drop
 - [x] User should be able to play multiple videos at the same time and move them
 around
 - [x] It should have an option to stop all videos at the same time
-- [] It should have an option to add all videos that are currently playing to favorites
+- [x] It should have an option to add all videos that are currently playing to favorites
 
 Bonus:
 - [] In the favorites list it should be able to order by date added, or by length of the
