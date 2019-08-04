@@ -1,0 +1,25 @@
+{
+  "name": "morph-tasks",
+  "version": "1.0.0",
+  "description": "## UI Task",
+  "main": "./src/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrijavulicevic/morph-tasks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrijavulicevic/morph-tasks/issues"
+  },
+  "homepage": "https://github.com/andrijavulicevic/morph-tasks#readme"
+}
