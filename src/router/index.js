@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home'
-import Login from  './views/Login'
-import Favorites from './views/Favorites';
-import store from './store/';
+import Home from '../views/Home'
+import Login from  '../views/Login'
+import Favorites from '../views/Favorites';
+import store from '../store/';
 
 Vue.use(Router)
 

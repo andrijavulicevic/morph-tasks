@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
 import api from './http';
 
-function loadMostPopular() {
+async function loadMostPopular() {
   return api.get('/videos', { 
     params: { 
       part: 'snippet',
@@ -11,7 +10,7 @@ function loadMostPopular() {
   })
 }
 
-function searchVideos(searchTerm) {
+async function searchVideos(searchTerm) {
   return api.get('/search', {
     params: {
       part: 'snippet',
